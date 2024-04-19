@@ -60,11 +60,11 @@ button{
     filter: brightness(0) invert(1); 
 }
 
-.menu__item__active{
+.menu__item_active{
     background: #5051F9
 }
 
-.menu__item__active img{
+.menu__item_active img{
     filter: brightness(0) invert(1);
 }
 
