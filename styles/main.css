@@ -198,6 +198,10 @@ button{
     color: #8899A8;
 }
 
+input.error {
+    border: 1px solid red
+}
+
 .habbit__form{
     display: flex;
     gap: 15px;
