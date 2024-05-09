@@ -67,18 +67,17 @@ function rerenderHead(activeHabbit) {
 
 function rerenderContent(activeHabbit) {
     page.content.daysContainer.innerHTML = "";
-    for (const index in activeHabbit.days){
+    for (const index in activeHabbit.days) {
         const element = document.createElement("div");
         element.classList.add("habbit");
-        element.innerHTML = `<div class="habbit__day">День ${Number(index)+1}</div>
+        element.innerHTML = `<div class="habbit__day">День ${Number(index) + 1}</div>
         <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
-        <button class="habbit__delete">
-            <img src="images/delete.svg" alt="Удалить день ${index+1}">
+        <button class="habbit__delete" onclick="deleteDay(${index})">
+            <img src="images/delete.svg" alt="Удалить день ${+index + 1}">
         </button>`;
         page.content.daysContainer.appendChild(element);
     }
-    page.content.nextDay.innerHTML = `День ${activeHabbit.days.length+1}`
-
+    page.content.nextDay.innerHTML = `День ${activeHabbit.days.length + 1}`
 }
 
 function rerender(activeHabbitId) {
@@ -93,7 +92,7 @@ function rerender(activeHabbitId) {
 }
 
 // work with days
-function addDays(event){
+function addDays(event) {
     const form = event.target;
     event.preventDefault();
     const data = new FormData(form);
@@ -102,18 +101,35 @@ function addDays(event){
     if (!comment) {
         form["comment"].classList.add("error")
     }
-    habbits = habbits.map(habbit =>{
-        if (habbit.id === globalActiveHabbitId){
+    habbits = habbits.map(habbit => {
+        if (habbit.id === globalActiveHabbitId) {
             return {
                 ...habbit,
-                days: habbit.days.concat([{ comment }])
+                days: habbit.days.concat([{ comment: comment }])
             }
         }
         return habbit;
     });
     form['comment'].value = "";
-    rerender(globalActiveHabbitId);
     saveData();
+    rerender(globalActiveHabbitId);
+}
+
+function deleteDay(index) {
+    habbits = habbits.map(habbit => {
+        if (habbit.id === globalActiveHabbitId) {
+            habbit.days.splice(index, 1);
+            return {
+                ...habbit,
+                days: habbit.days
+            };
+
+
+        }
+        return habbit;
+    })
+    saveData();
+    rerender(globalActiveHabbitId)
 }
 
 // init
