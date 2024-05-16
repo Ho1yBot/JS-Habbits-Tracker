@@ -20,7 +20,8 @@ const page = {
     popup: {
         index: document.querySelector("#add-habbit-popup"),
         addHabbit: document.querySelector(".menu__add"),
-        closePopup: document.querySelector(".popup__close")
+        closePopup: document.querySelector(".popup__close"),
+        iconField: document.querySelector(".popup__form input[name='icon']")
     }
 }
 
@@ -35,6 +36,15 @@ function loadData() {
 
 function saveData() {
     localStorage.setItem(HABBIT_KEY, JSON.stringify(habbits))
+}
+
+function togglePopup(){
+    const hasDisplay = page.popup.index
+    if(hasDisplay.classList.contains("cover_hidden")){
+        hasDisplay.classList.remove("cover_hidden")
+    } else {
+        hasDisplay.classList.add("cover_hidden")
+    }
 }
 
 // render
@@ -137,13 +147,13 @@ function deleteDay(index) {
     rerender(globalActiveHabbitId)
 }
 
-function togglePopup(){
-    const hasDisplay = page.popup.index
-    if(hasDisplay.classList.contains("cover_hidden")){
-        hasDisplay.classList.remove("cover_hidden")
-    } else {
-        hasDisplay.classList.add("cover_hidden")
-    }
+// work with habbits
+
+function setIcon(context, icon){
+    page.popup.iconField.value = icon;
+    const activeIcon = document.querySelector('.icon.icon_active');
+    activeIcon.classList.remove("icon_active");
+    context.classList.add("icon_active");
 }
 
 // init
