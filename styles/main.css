@@ -107,6 +107,7 @@ button{
     flex-direction: column;
     gap: 12px;
     min-width: 235px;
+    position: relative;
 }
 
 .progress__text{
@@ -140,6 +141,25 @@ button{
     height: 5px;
     border-radius: 4px;
     background: #5051F9;
+}
+
+.settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0px;
+    top: 60px;
+    position: absolute;
+    background: none;
+    border: none;
+}
+
+.settings:hover{
+    background: #EFF2FF;
+}
+
+.settings img{
+    width: 15px;
 }
 
 .main{
@@ -224,7 +244,7 @@ input.error {
     background: #EDECFE;
     border-radius: 9px;
     border: none;
-    font-style: 13px;
+    font-size: 13px;
     line-height: 14px;
     color: #5051F9;
     padding: 14px 30px;

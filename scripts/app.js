@@ -101,6 +101,11 @@ function rerenderMenu(activeHabbit) {
     }
 }
 
+if(habbits.length === 0){
+    const h1Default = document.querySelector(".h1");
+    h1Default.innerText = "Добавьте первую привычку";
+}
+
 function rerenderHead(activeHabbit) {
     page.header.h1.innerText = activeHabbit.name;
     const progress = activeHabbit.days.length / activeHabbit.target > 1
@@ -207,6 +212,7 @@ function addHabbit(event) {
 // init
 (() => {
     loadData();
+    
     const hashId = Number(document.location.hash.replace("#", ""));
     const urlHabbit = habbits.find(habbit => habbit.id == hashId)
     if(urlHabbit){
