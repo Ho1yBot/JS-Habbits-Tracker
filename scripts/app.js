@@ -60,14 +60,14 @@ function validateAndGetFormData(form, fields) {
     for (const field of fields) {
         const fieldValue = formData.get(field);
         form[field].classList.remove("error");
-        if (!fieldValue) {
+        if (!fieldValue || (field === "target" && (response[field] <= 0))) {
             form[field].classList.add("error")
         }
         response[field] = fieldValue;
     }
     let isValid = true;
     for (const field of fields) {
-        if (!response[field]) {
+        if (!response[field] || (field === "target" && (response[field] <= 0))) {
             isValid = false;
         }
     }
@@ -192,7 +192,7 @@ function setIcon(context, icon) {
 function addHabbit(event) {
     event.preventDefault();
     const data = validateAndGetFormData(event.target, ["name", "icon", "target"]);
-    if (!data) {
+    if (!data ) {
         return;
     }
     const maxId = habbits.reduce((acc, habbit) => acc > habbit.id ? acc : habbit.id, 0)
