@@ -209,6 +209,12 @@ function addHabbit(event) {
     rerender(maxId + 1);
 }
 
+function deleteHabbit() {
+    habbits = habbits.filter(habbit => habbit.id !== globalActiveHabbitId);
+    saveData();
+    document.location.replace(document.location.pathname);
+}
+
 // init
 (() => {
     loadData();
